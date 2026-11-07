@@ -1,0 +1,12 @@
+{
+  "source_repository_revision": "ba93d3fe53fe334d87daa44d7e7eb3ddd11230d9",
+  "upstream_file": "solid_deception/data_generation/munge_data.py",
+  "upstream_file_sha256": "c0bc296626623c816b335e58bd32252de4ff294ec4c94792ac39bce49c9bee99",
+  "source_parquet_sha256": "343f53d05916caf006c4761b152fc22a0820f14887e243dfcc01c3e6fefb30e2",
+  "full_artifact_sha256": "7cc8b0e938ae59ae7d24c568865614060775c982e74254668c91ea0a4c278396",
+  "verification": "Executed the upstream repository's compose_context_str and transform_data function definitions, extracted unchanged using Python AST, on all three seed-0 partitions with a continuous random.Random(0) instance. Compared source row, source ID, system text, user text, and both answers for every pair.",
+  "pairs_checked": 64888,
+  "pairs_matched": 64888,
+  "source_parse_failures": 0,
+  "seed0_detector_pairs_preserved": 3082
+}

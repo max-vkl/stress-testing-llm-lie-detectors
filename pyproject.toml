@@ -1,0 +1,80 @@
+[project]
+name = "deception_detection"
+version = "0.0.1"
+description = "Reproduce the Llama main table from Stress-Testing LLM Lie Detectors"
+requires-python = ">=3.11"
+readme = "README.md"
+dependencies = ["torch==2.7.1", "pydantic~=2.0", "fire~=0.5.0", "tqdm~=4.66.2", "pytest~=8.2.0", "matplotlib~=3.9.2", "jaxtyping~=0.2.29", "transformers==4.52.4", "tokenizers>=0.20.1", "pandas~=2.2.2", "einops~=0.7.0", "numpy~=1.26.4", "plotly", "scikit-learn", "circuitsvis", "accelerate", "tabulate", "seaborn", "peft", "huggingface-hub>=0.33.0", "pyarrow", "pyyaml", "termcolor"]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.5.0",
+    "pyright>=1.1.348",
+    "pre-commit~=3.6.0",
+]
+
+# Pull torch (and its CUDA runtime) from the PyTorch cu128 index so recent GPUs, including
+# Blackwell, are supported. Run `uv lock && uv sync` after changing this to regenerate uv.lock.
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+[tool.setuptools.packages.find]
+include = ["deception_detection*"]
+
+[tool.ruff]
+line-length = 100
+fix = false
+exclude = []
+# for jaxtyping, see https://docs.kidger.site/jaxtyping/faq/#flake8-or-ruff-are-throwing-an-error
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+ignore = ["F722", "E712"]
+
+[tool.ruff.format]
+# Enable reformatting of code snippets in docstrings.
+docstring-code-format = true
+
+[tool.ruff.lint.isort]
+known-third-party = ["wandb"]
+
+[tool.pyright]
+include = ["deception_detection", "tests"]
+exclude = []
+typeCheckingMode = "strict"
+
+reportPrivateImportUsage = false
+reportUnknownVariableType = false
+reportUnknownMemberType = false
+reportMissingTypeStubs = false
+reportUntypedFunctionDecorator = false
+
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    'ignore:Type google._upb._message',
+    'ignore:open_text is deprecated',
+]

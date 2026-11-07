@@ -1,0 +1,51 @@
+# Marks/Buerger Truth: Table 2 results, fixed zero-indexed layer from Appendix B, Table 5.
+# https://arxiv.org/html/2609.39807v1#A2.T5
+# Evaluate 15 original + 15 shared-persona conditions and three confounders.
+# Keep detector and score artifacts for inspection and reruns.
+method: ltlr_ct
+model_name: llama-70b-3.3
+train_data: tiu__cannonical_ct
+eval_data:
+- personas__paper_ready_ancient_astronaut
+- personas__paper_ready_ancient_astronaut_deceptOnlySysPrompt
+- personas__paper_ready_astrology
+- personas__paper_ready_astrology_deceptOnlySysPrompt
+- personas__paper_ready_conspiracy
+- personas__paper_ready_conspiracy_deceptOnlySysPrompt
+- personas__paper_ready_flat_earth
+- personas__paper_ready_flat_earth_deceptOnlySysPrompt
+- personas__paper_ready_harrypotter
+- personas__paper_ready_harrypotter_deceptOnlySysPrompt
+- personas__paper_ready_man_in_high_castle
+- personas__paper_ready_man_in_high_castle_deceptOnlySysPrompt
+- personas__paper_ready_medievalphy
+- personas__paper_ready_medievalphy_deceptOnlySysPrompt
+- personas__paper_ready_miasma
+- personas__paper_ready_miasma_deceptOnlySysPrompt
+- personas__paper_ready_orwell
+- personas__paper_ready_orwell_deceptOnlySysPrompt
+- personas__paper_ready_phlogiston
+- personas__paper_ready_phlogiston_deceptOnlySysPrompt
+- personas__paper_ready_quantumcoach
+- personas__paper_ready_quantumcoach_deceptOnlySysPrompt
+- personas__paper_ready_startrek
+- personas__paper_ready_startrek_deceptOnlySysPrompt
+- personas__paper_ready_wakanda
+- personas__paper_ready_wakanda_deceptOnlySysPrompt
+- personas__paper_ready_pteolomeic_astronomer
+- personas__paper_ready_pteolomeic_astronomer_deceptOnlySysPrompt
+- personas__paper_ready_phrenologist
+- personas__paper_ready_phrenologist_deceptOnlySysPrompt
+- confounder_experiments__probability_score_learning_16turn
+- confounder_experiments__persona_stance_nora
+- confounder_experiments__compliance_brackets
+eval_on_policy: true
+no_control: true
+enable_rerun: true
+id: paper_main_llama_marks_burger_truth
+val_fraction: 0.2
+merge_layers: false
+detect_layers:
+- 18
+reg_coeff: 10
+max_iter: 5000
